@@ -28,7 +28,6 @@
                     <th scope="col">Qty</th>
                     <th scope="col">Harga</th>
                     <th scope="col">Total</th>
-                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -42,11 +41,6 @@
                     <td>{{ $data->qty }} </td>
                     <td>{{ $data->harga }}</td>
                     <td>{{ $data->price }}</td>
-                    <td>
-                      <a href="{{ url('delete') }}/{{$data->transaksiId}}" class="btn" onclick="return confirm('Are you sure you want to delete this document ?')">
-                          <i class="fas fa-trash-alt"></i>
-                      </a>
-                    </td>
                 </tr>
               @endforeach
             </tbody>

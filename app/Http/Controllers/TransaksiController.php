@@ -35,12 +35,4 @@ class TransaksiController extends Controller
 
         return redirect('home');
     }
-
-    public function hapusTransaksi($transaksiId){
-        DB::table('transaksi')
-        ->where('$transaksiId',$transaksiId)
-        ->delete();
-
-        return redirect('addTransaksi');
-    }
 }

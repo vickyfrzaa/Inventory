@@ -33,6 +33,14 @@
                     </div>
                 </div><br>
 
+
+                @if (Session()->has('danger'))
+                    <div class="alert alert-danger" role="alert">
+                    {{session()->get('danger')}}
+                    </div>
+                 @endif
+
+
                 <div class="card">
                     <div class="card-header text-center">{{ __('List Barang') }}</div>
 
@@ -53,7 +61,7 @@
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="table-group-divider">
                             @php $no = $dataBarang->firstItem(); @endphp
                                 @foreach($dataBarang as $data)
                                 <tr>
@@ -62,9 +70,6 @@
                                     <td>{{ $data->qty }}</td>
                                     <td>{{ $data->tglExp }}</td>
                                     <td>
-                                        <!-- <a href="{{ url('barangEdit') }}/{{ $data->barangId }}" class="btn">
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </a> -->
                                         <a href="{{ url('delete') }}/{{$data->barangId }}" class="btn" onclick="return confirm('Are you sure you want to delete this document ?')">
                                             <i class="fas fa-trash-alt"></i>
                                         </a>

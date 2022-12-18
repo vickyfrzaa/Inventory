@@ -31,7 +31,7 @@ class TokoController extends Controller
 
     public function hapusToko($tokoId){
         DB::table('toko')
-        ->where('tokoId',$tokoId)
+        ->where('tokoId', $tokoId)
         ->delete();
 
         return redirect('addToko');

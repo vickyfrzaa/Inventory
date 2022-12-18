@@ -52,7 +52,7 @@
                                     <th scope="col">Kontak</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="table-group-divider">
                             @php $no = $dataToko->firstItem(); @endphp
                             @foreach($dataToko as $data)
                                 <tr>

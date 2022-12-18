@@ -28,31 +28,10 @@ class BarangController extends Controller
 
         return redirect('home');
     }
-
-    // public function barangEdit($barangId){
-    //     $editBarang = DB::table('barang')
-    //     ->where('barangId',$barangId)
-    //     ->get();
-
-    //     return view('addBarang')
-    //     ->with('dataBarang', $editBarang);
-    // }
-
-    // public function editBarang(Request $request){
-    //     DB::table('barang')
-    //     ->where('barangId',$request->barangId)
-    //     ->update([
-    //         'namaBarang' => $request->namaBarang,
-    //         'qty' => $request->qty,
-    //         'tglExp' => $request->tglExp, 
-    //     ]);
-
-    //     return redirect('history');
-    // }
-
+    
     public function hapusBarang($barangId){
         DB::table('barang')
-        ->where('barangId',$barangId)
+        ->where('barangId', $barangId)
         ->delete();
 
         return redirect('addBarang');
