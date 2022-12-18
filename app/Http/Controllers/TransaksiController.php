@@ -27,13 +27,20 @@ class TransaksiController extends Controller
 
         $data->namaToko = $request->input('namaToko');
         $data->namaBarang = $request->input('namaBarang');
-        $data->qty = $request->input('jumlah');
+        $data->qty = $request->input('qty');
         $data->harga = $request->input('harga');
-        $data->total = $request->input('total');
         $data->tglBeli = $request->input('tglBeli');
         
         $data->save();
 
-        return view('home');
+        return redirect('home');
+    }
+
+    public function hapusTransaksi($transaksiId){
+        DB::table('transaksi')
+        ->where('$transaksiId',$transaksiId)
+        ->delete();
+
+        return redirect('addTransaksi');
     }
 }

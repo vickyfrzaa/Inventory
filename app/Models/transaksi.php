@@ -12,6 +12,6 @@ class transaksi extends Model
     protected $primary = 'transaksiId';
 
     protected $fillable = [
-        'namaToko', 'namaBarang', 'qty', 'harga', 'total', 'tglBeli'
+        'namaToko', 'namaBarang', 'qty', 'harga', 'tglBeli'
     ];
 }

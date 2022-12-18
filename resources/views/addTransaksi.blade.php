@@ -8,28 +8,30 @@
                     <div class="card-body pt-4">
                         <form action="{{ route('detailTransaksi') }}" method="POST">
                             @csrf
-                            <input type="hidden" name="total" value="total">
-                            <input type="hidden" name="qty" value="qty">
+                            @foreach($dataBarang as $data)
+                                <input type="hidden" name="qty" value="{{$data->qty}}">
+                            @endforeach
                             <div class="row mb-3">
                                 <label for="namaToko" class="col-sm-2 col-form-label">Nama Toko</label>
                                 <div class="col-sm">
-                                    @foreach($dataToko as $data)
                                     <select class="form-select" aria-label="Default select example" name="namaToko">
                                         <option selected>Open this select menu</option>
-                                        <option value="{{$data->namaToko}}">{{$data->namaToko}}</option>
+                                        @foreach($dataToko as $data)
+                                            <option value="{{$data->namaToko}}">{{$data->namaToko}}</option>
+                                        @endforeach
                                     </select>
-                                    @endforeach
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="namaBarang" class="col-sm-2 col-form-label">Nama Barang</label>
                                 <div class="col-sm">
-                                    @foreach($dataBarang as $data)
+                                    
                                     <select class="form-select" aria-label="Default select example" name="namaBarang">
                                         <option selected>Open this select menu</option>
-                                        <option value="{{$data->namaBarang}}">{{$data->namaBarang}}</option>
+                                        @foreach($dataBarang as $data)
+                                            <option value="{{$data->namaBarang}}">{{$data->namaBarang}}</option>
+                                        @endforeach
                                     </select>
-                                    @endforeach
                                 </div>
                             </div>
                             <div class="row mb-3">

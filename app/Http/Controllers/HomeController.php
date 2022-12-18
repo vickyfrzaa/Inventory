@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\toko;
-use App\barang;
-use App\transaksi;
+use App\Models\toko;
+use App\Models\barang;
+use App\Models\transaksi;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -27,6 +27,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $transaksi = DB::table('transaksi')
+        ->select('transaksiId', 'namaToko', 'namaBarang', 'tglBeli', 'qty', 'harga', DB::raw('(qty * harga) as price'))
+        ->groupBy('transaksiId', 'namaToko', 'namaBarang', 'tglBeli', 'qty', 'harga')
+        ->orderBy('namaToko', 'ASC')
+        ->paginate(5);
+        // $transaksi = DB::table('transaksi')
+        // ->get();
+
+        return view('home')
+        ->with('dataTransaksi', $transaksi);
     }
 }

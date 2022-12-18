@@ -11,7 +11,11 @@ use Illuminate\Support\Facades\DB;
 class TokoController extends Controller
 {
     public function addToko(){
-        return view('addToko');
+        $toko = DB::table('toko')
+        ->paginate(5);
+
+        return view('addToko')
+        ->with('dataToko', $toko);
     }
 
     public function detailToko(Request $request){
@@ -22,6 +26,14 @@ class TokoController extends Controller
         $data->kontak = $request->input('kontak');
         $data->save();
 
-        return view('home');
+        return redirect('home');
+    }
+
+    public function hapusToko($tokoId){
+        DB::table('toko')
+        ->where('tokoId',$tokoId)
+        ->delete();
+
+        return redirect('addToko');
     }
 }

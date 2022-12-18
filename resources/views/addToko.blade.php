@@ -31,7 +31,51 @@
                             </div>
                         </form>
                     </div>
+                </div><br>
+
+                <div class="card">
+                    <div class="card-header text-center">{{ __('List Toko') }}</div>
+
+                    <div class="card-body" style="background-color: #b5d9f4;">
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Nama Toko</th>
+                                    <th scope="col">Alamat</th>
+                                    <th scope="col">Kontak</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @php $no = $dataToko->firstItem(); @endphp
+                            @foreach($dataToko as $data)
+                                <tr>
+                                    <th scope="row">{{ $no++ }}</th>
+                                    <td>{{ $data->namaToko }}</td>
+                                    <td>{{ $data->alamat }}</td>
+                                    <td>{{ $data->kontak }}</td>
+                                    <td>
+                                        <a href="{{ url('delete') }}/{{$data->tokoId }}" class="btn" onclick="return confirm('Are you sure you want to delete this document ?')">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+                <nav aria-label="...">
+                    <ul class="pagination justify-content-center pt-4">
+                        {{ $dataToko->links() }}
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

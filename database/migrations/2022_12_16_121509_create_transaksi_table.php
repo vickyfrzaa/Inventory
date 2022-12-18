@@ -19,7 +19,6 @@ class CreateTransaksiTable extends Migration
             $table->string('namaBarang');
             $table->integer('qty');
             $table->float('harga');
-            $table->float('total');
             $table->date('tglBeli');
             $table->timestamps();
         });

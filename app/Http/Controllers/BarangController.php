@@ -11,7 +11,11 @@ use Illuminate\Support\Facades\DB;
 class BarangController extends Controller
 {
     public function addBarang(){
-        return view('addBarang');
+        $barang = DB::table('barang')
+        ->paginate(5);
+
+        return view('addBarang')
+        ->with('dataBarang', $barang);
     }
     
     public function detailBarang(Request $request){
@@ -22,6 +26,35 @@ class BarangController extends Controller
         $data->tglExp = $request->input('tglExp');
         $data->save();
 
-        return view('home');
+        return redirect('home');
+    }
+
+    // public function barangEdit($barangId){
+    //     $editBarang = DB::table('barang')
+    //     ->where('barangId',$barangId)
+    //     ->get();
+
+    //     return view('addBarang')
+    //     ->with('dataBarang', $editBarang);
+    // }
+
+    // public function editBarang(Request $request){
+    //     DB::table('barang')
+    //     ->where('barangId',$request->barangId)
+    //     ->update([
+    //         'namaBarang' => $request->namaBarang,
+    //         'qty' => $request->qty,
+    //         'tglExp' => $request->tglExp, 
+    //     ]);
+
+    //     return redirect('history');
+    // }
+
+    public function hapusBarang($barangId){
+        DB::table('barang')
+        ->where('barangId',$barangId)
+        ->delete();
+
+        return redirect('addBarang');
     }
 }

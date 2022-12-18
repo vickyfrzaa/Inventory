@@ -5,7 +5,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{ __('List Barang') }}</div>
+        <div class="card-header text-center">{{ __('List Barang') }}</div>
 
         <div class="card-body" style="background-color: #b5d9f4;">
           @if (session('status'))
@@ -13,9 +13,9 @@
                   {{ session('status') }}
               </div>
           @endif
-            
+
           <button type="button" class="btn btn-success mb-4">
-            <a href="{{ url('addTransaksi') }}">Tambah Transaksi</a>
+            <a href="{{ url('addTransaksi') }}" class="text-black text-decoration-none fw-bold">Tambah Transaksi</a>
           </button>
 
             <table class="table">
@@ -28,36 +28,36 @@
                     <th scope="col">Qty</th>
                     <th scope="col">Harga</th>
                     <th scope="col">Total</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider">
+              @php $no = $dataTransaksi->firstItem(); @endphp
+              @foreach($dataTransaksi as $data)
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
+                    <th scope="row">{{ $no++ }}</th>
+                    <td>{{ $data->namaToko }}</td>
+                    <td>{{ $data->namaBarang }}</td>
+                    <td>{{ $data->tglBeli }}</td>
+                    <td>{{ $data->qty }} </td>
+                    <td>{{ $data->harga }}</td>
+                    <td>{{ $data->price }}</td>
+                    <td>
+                      <a href="{{ url('delete') }}/{{$data->transaksiId}}" class="btn" onclick="return confirm('Are you sure you want to delete this document ?')">
+                          <i class="fas fa-trash-alt"></i>
+                      </a>
+                    </td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                </tr>
+              @endforeach
             </tbody>
           </table>
         </div>
       </div>
+      <nav aria-label="...">
+        <ul class="pagination justify-content-center pt-4">
+          {{ $dataTransaksi->links() }}
+        </ul>
+      </nav>
     </div>
   </div>
 </div>

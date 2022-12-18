@@ -37,55 +37,49 @@
                     <div class="card-header text-center">{{ __('List Barang') }}</div>
 
                     <div class="card-body" style="background-color: #b5d9f4;">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                        
-                    <button type="button" class="btn btn-success mb-4">Tambah Transaksi
-                        <a href="{{ url('addBarang') }}"></a>
-                    </button>
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
 
                         <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">No.</th>
-                                <th scope="col">Nama Toko</th>
-                                <th scope="col">Nama Barang</th>
-                                <th scope="col">Tanggal Pembelian</th>
-                                <th scope="col">Qty</th>
-                                <th scope="col">Harga</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            <thead>
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Nama Barang</th>
+                                    <th scope="col">Stock Barang</th>
+                                    <th scope="col">Tanggal Expaired</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @php $no = $dataBarang->firstItem(); @endphp
+                                @foreach($dataBarang as $data)
+                                <tr>
+                                    <th scope="row">{{ $no++ }}</th>
+                                    <td>{{ $data->namaBarang }}</td>
+                                    <td>{{ $data->qty }}</td>
+                                    <td>{{ $data->tglExp }}</td>
+                                    <td>
+                                        <!-- <a href="{{ url('barangEdit') }}/{{ $data->barangId }}" class="btn">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </a> -->
+                                        <a href="{{ url('delete') }}/{{$data->barangId }}" class="btn" onclick="return confirm('Are you sure you want to delete this document ?')">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+                <nav aria-label="...">
+                    <ul class="pagination justify-content-center pt-4">
+                        {{ $dataBarang->links() }}
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
