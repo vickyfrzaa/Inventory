@@ -14,9 +14,22 @@
               </div>
           @endif
 
-          <button type="button" class="btn btn-success mb-4">
+          <nav class="navbar">
+            <div class="container">
+            <button type="button" class="btn btn-success mb-4">
+              <a href="{{ url('addTransaksi') }}" class="text-black text-decoration-none fw-bold">Tambah Transaksi</a>
+            </button>
+              <form class="d-flex" role="search">
+                <p class="fw-bold text-dark">Sub Total :</p>
+                @foreach($dataTransaksiAll as $data)
+                  <p class="fw-bold ms-3">Rp. {{ $data->subTotal }}</p>
+                @endforeach
+              </form>
+            </div>
+          </nav>
+          <!-- <button type="button" class="btn btn-success mb-4">
             <a href="{{ url('addTransaksi') }}" class="text-black text-decoration-none fw-bold">Tambah Transaksi</a>
-          </button>
+          </button> -->
 
             <table class="table">
             <thead>

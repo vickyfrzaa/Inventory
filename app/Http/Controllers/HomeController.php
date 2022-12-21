@@ -32,10 +32,16 @@ class HomeController extends Controller
         ->groupBy('transaksiId', 'namaToko', 'namaBarang', 'tglBeli', 'qty', 'harga')
         ->orderBy('namaToko', 'ASC')
         ->paginate(5);
+
+        $allTransaksi = DB::table('transaksi')
+        ->select(DB::raw('sum(qty * harga) as subTotal'))
+        ->get();
+
         // $transaksi = DB::table('transaksi')
         // ->get();
 
         return view('home')
-        ->with('dataTransaksi', $transaksi);
+        ->with('dataTransaksi', $transaksi)
+        ->with('dataTransaksiAll', $allTransaksi);
     }
 }
